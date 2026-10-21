@@ -1,4 +1,4 @@
-export type ApiErrorCode =
+type ApiErrorCode =
   | 'VALIDATION'
   | 'UNAUTHORIZED'
   | 'NOT_FOUND'

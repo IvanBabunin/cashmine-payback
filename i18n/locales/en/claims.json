@@ -1,7 +1,6 @@
 {
   "title": "Claim payback",
   "statusTitle": "Claim",
-  "asset": "Asset",
   "amount": "Amount",
   "amountPlaceholder": "0.00",
   "max": "Max",

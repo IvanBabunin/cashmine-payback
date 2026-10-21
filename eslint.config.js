@@ -37,7 +37,7 @@ const UI_AND_ABOVE = ['app', 'components', 'hooks', 'providers'];
 module.exports = defineConfig([
   expoConfig,
   {
-    ignores: ['dist/*', 'navigation/*', 'scripts/*', 'helpers/api/schema.d.ts', '.expo/*'],
+    ignores: ['dist/*', '.expo/*'],
   },
   { rules: { 'no-restricted-imports': deny() } },
   { files: ['providers/**'], rules: { 'no-restricted-imports': deny('app') } },
