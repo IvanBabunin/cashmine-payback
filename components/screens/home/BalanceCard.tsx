@@ -1,12 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { View, type TextStyle } from 'react-native';
 
-import { Button, Text } from '@/components/shared/ui';
+import { Button, CoinBadge, Text } from '@/components/shared/ui';
 import { formatAmount, formatUsd } from '@/helpers/format/amount';
 import type { DisplayBalance } from '@/helpers/reconcile-balances';
 import { makeStyles } from '@/theme';
-
-import { CoinBadge } from './CoinBadge';
 
 type BalanceCardProps = {
   balance: DisplayBalance;

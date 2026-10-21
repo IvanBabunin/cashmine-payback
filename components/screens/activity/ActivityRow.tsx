@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
-import { Text } from '@/components/shared/ui';
+import { CoinBadge, Text } from '@/components/shared/ui';
 import type { ActivityItem } from '@/types/models/activity';
 import { makeStyles, type Colors } from '@/theme';
 
@@ -10,34 +10,44 @@ type ActivityRowProps = {
 };
 
 const STATUS_COLOR: Record<ActivityItem['status'], keyof Colors> = {
-  pending: 'warning',
+  pending: 'accent',
   confirmed: 'textMuted',
   completed: 'success',
   failed: 'danger',
 };
 
+const DATE_FORMAT = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+
 export function ActivityRow({ item }: ActivityRowProps) {
   const { t } = useTranslation('activity');
   const styles = useStyles();
   const negative = item.amount.startsWith('-');
-  const date = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(
-    new Date(item.createdAt),
-  );
 
   return (
     <View style={styles.root}>
+      <CoinBadge asset={item.asset} size="sm" />
       <View style={styles.left}>
-        <Text variant="label">
+        <Text variant="label" numberOfLines={1}>
           {t(`type.${item.type}`)}
-          {item.exchange ? ` · ${item.exchange}` : ''}
+          {item.exchange ? (
+            <Text variant="label" color="textMuted">
+              {` · ${item.exchange}`}
+            </Text>
+          ) : null}
         </Text>
         <Text variant="caption" color="textMuted">
-          {date}
+          {DATE_FORMAT.format(new Date(item.createdAt))}
         </Text>
       </View>
       <View style={styles.right}>
-        <Text variant="label" color={negative ? 'text' : 'success'} selectable tabular>
-          {negative ? item.amount : `+${item.amount}`} {item.asset}
+        <Text
+          variant="label"
+          color={negative ? 'text' : 'success'}
+          tabular
+          selectable
+          style={styles.amount}
+        >
+          {negative ? item.amount.replace('-', '−') : `+${item.amount}`} {item.asset}
         </Text>
         <Text variant="caption" color={STATUS_COLOR[item.status]}>
           {t(`status.${item.status}`)}
@@ -50,12 +60,12 @@ export function ActivityRow({ item }: ActivityRowProps) {
 const useStyles = makeStyles((t) => ({
   root: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     gap: t.spacing.md,
     paddingVertical: t.spacing.md,
-    borderBottomWidth: 1,
-    borderBottomColor: t.colors.border,
+    paddingHorizontal: t.spacing.lg,
   },
-  left: { flex: 1, gap: t.spacing.xs },
-  right: { alignItems: 'flex-end', gap: t.spacing.xs },
+  left: { flex: 1, minWidth: 0, gap: t.spacing.xs },
+  right: { flexShrink: 1, alignItems: 'flex-end', gap: t.spacing.xs },
+  amount: { textAlign: 'right' },
 }));
