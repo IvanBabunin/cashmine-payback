@@ -6,7 +6,9 @@ import { queryKeys } from '@/helpers/api/query-keys';
 import { useClaimsStore } from '@/store/claims';
 import type { CreateClaimBody } from '@/types/models/claim';
 
-type Variables = { key: string; body: CreateClaimBody };
+export type CreateClaimVariables = { key: string; body: CreateClaimBody };
+
+export const CREATE_CLAIM_KEY = ['claims', 'create'] as const;
 
 const MAX_RETRIES = 2;
 
@@ -20,7 +22,8 @@ export function useCreateClaim() {
   const { start, confirm, remove } = useClaimsStore.getState();
 
   return useMutation({
-    mutationFn: ({ key, body }: Variables) => {
+    mutationKey: CREATE_CLAIM_KEY,
+    mutationFn: ({ key, body }: CreateClaimVariables) => {
       if (!useClaimsStore.getState().submissions[key]) start(key, body);
       return createClaim(body, key);
     },

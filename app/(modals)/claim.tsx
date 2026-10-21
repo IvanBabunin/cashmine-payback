@@ -18,14 +18,14 @@ type Draft = { key: string; body: CreateClaimBody };
 export default function ClaimScreen() {
   const { t } = useTranslation(['claims', 'common']);
   const { asset } = useLocalSearchParams<{ asset?: string }>();
-  const { query: balancesQuery, balances, unresolved } = useDisplayBalances();
+  const { query: balancesQuery, balances, unconfirmed } = useDisplayBalances();
   const optionsQuery = useClaimOptions(asset);
   const createClaim = useCreateClaim();
   const [draft, setDraft] = useState<Draft | null>(null);
 
   const balance = balances?.find((b) => b.asset === asset);
   // A claim for this asset whose outcome we never learned takes over the screen until it resolves.
-  const pendingUnknown = unresolved.find((s) => s.body.asset === asset);
+  const pendingUnknown = unconfirmed.find((s) => s.body.asset === asset);
   const active: Draft | null = pendingUnknown
     ? { key: pendingUnknown.key, body: pendingUnknown.body }
     : draft;
