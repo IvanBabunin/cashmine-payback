@@ -18,6 +18,9 @@ export const lightColors = {
   primary: brand.orange,
   onPrimary: brand.ink,
   accent: '#A94708',
+  accentSoft: '#F58A3A1F',
+  inset: '#F5F2EE',
+  onAccent: '#FFFFFF',
   success: '#21764B',
   warning: '#8A5A00',
   danger: '#B83B38',
@@ -36,9 +39,19 @@ export const darkColors: Colors = {
   primary: brand.orange,
   onPrimary: brand.ink,
   accent: brand.orange,
+  accentSoft: '#F58A3A1F',
+  inset: '#0D0C0B',
+  onAccent: '#FFFFFF',
   success: '#47C98B',
   warning: '#E3A008',
   danger: '#EF6B68',
+};
+
+/** Recognisable asset colours for the coin badge and share bar; unknown assets fall back to textMuted. */
+export const assetColors: Record<string, string> = {
+  USDT: '#26A17B',
+  BTC: '#F7931A',
+  ETH: '#627EEA',
 };
 
 export const spacing = {
@@ -58,6 +71,7 @@ export const radius = {
 } as const;
 
 export const typography = {
+  display: { fontFamily: 'Inter_700Bold', fontSize: 40, lineHeight: 46, letterSpacing: -1.2 },
   title: { fontFamily: 'Inter_700Bold', fontSize: 32, lineHeight: 38, letterSpacing: -0.8 },
   subtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 18, lineHeight: 24, letterSpacing: -0.2 },
   body: { fontFamily: 'Inter_400Regular', fontSize: 16, lineHeight: 22 },

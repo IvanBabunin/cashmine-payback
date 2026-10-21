@@ -6,7 +6,7 @@ import { Text } from './Text';
 
 type ButtonProps = Omit<PressableProps, 'children'> & {
   title: string;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'tonal' | 'ghost';
   loading?: boolean;
 };
 
@@ -21,7 +21,7 @@ export function Button({
   const styles = useStyles();
   const theme = useTheme();
   const isDisabled = disabled || loading;
-  const textColor = variant === 'primary' ? 'onPrimary' : 'text';
+  const textColor = variant === 'primary' ? 'onPrimary' : variant === 'tonal' ? 'accent' : 'text';
 
   return (
     <Pressable
@@ -58,7 +58,8 @@ const useStyles = makeStyles((t) => ({
   },
   primary: { backgroundColor: t.colors.primary },
   secondary: { backgroundColor: t.colors.secondaryButton },
+  tonal: { backgroundColor: t.colors.accentSoft },
   ghost: { backgroundColor: 'transparent' },
-  pressed: { opacity: 0.8 },
+  pressed: { opacity: 0.85, transform: [{ scale: 0.98 }] },
   disabled: { opacity: 0.5 },
 }));

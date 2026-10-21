@@ -1,22 +1,25 @@
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { RefreshControl } from 'react-native';
+import { RefreshControl, View } from 'react-native';
 
 import { BalanceCard } from '@/components/screens/home/BalanceCard';
 import { TotalHeader } from '@/components/screens/home/TotalHeader';
 import { UnresolvedClaimBanner } from '@/components/screens/home/UnresolvedClaimBanner';
 import { EmptyState, ErrorState, LoadingState, Screen } from '@/components/shared/layout';
+import { Text } from '@/components/shared/ui';
 import { useDisplayBalances } from '@/hooks/api/balances/useDisplayBalances';
 import { useCreateClaim } from '@/hooks/api/claims/useCreateClaim';
 import { useNow } from '@/hooks/ui/useNow';
 import { errorMessageKey } from '@/helpers/api/errors';
 import { ROUTES } from '@/helpers/routes';
+import { makeStyles } from '@/theme';
 
 export default function HomeScreen() {
   const { t } = useTranslation(['home', 'common']);
   const { query, balances, total, unresolved } = useDisplayBalances();
   const retryClaim = useCreateClaim();
   const now = useNow(5_000);
+  const styles = useStyles();
 
   if (query.isPending) {
     return (
@@ -36,12 +39,17 @@ export default function HomeScreen() {
   return (
     <Screen
       scroll
+      edges={['top']}
       refreshControl={
         <RefreshControl refreshing={query.isRefetching} onRefresh={() => query.refetch()} />
       }
     >
+      <Text variant="subtitle" style={styles.brand}>
+        {t('brand')}
+      </Text>
       <TotalHeader
         totalCents={total}
+        balances={balances}
         asOf={query.data.asOf}
         now={now}
         refreshing={query.isFetching}
@@ -62,6 +70,14 @@ export default function HomeScreen() {
           }
         />
       ))}
+      {balances.length > 0 ? (
+        <View style={styles.section}>
+          <Text variant="subtitle">{t('assets')}</Text>
+          <Text variant="caption" color="textMuted">
+            {t('assetCount', { count: balances.length })}
+          </Text>
+        </View>
+      ) : null}
       {balances.length === 0 ? (
         <EmptyState title={t('empty')} description={t('emptyDescription')} />
       ) : (
@@ -76,3 +92,13 @@ export default function HomeScreen() {
     </Screen>
   );
 }
+
+const useStyles = makeStyles((t) => ({
+  brand: { paddingTop: t.spacing.sm },
+  section: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+    marginTop: t.spacing.sm,
+  },
+}));
