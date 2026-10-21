@@ -1,5 +1,5 @@
-import { useMutationState, useQueries } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useMutationState, useQueries, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo } from 'react';
 
 import { getClaim } from '@/api/claims';
 import { queryKeys } from '@/helpers/api/query-keys';
@@ -9,9 +9,12 @@ import { useClaimsStore } from '@/store/claims';
 
 import { useBalances } from './useBalances';
 
+const CLAIM_POLL_MS = 3_000;
+
 /** Server balances with this device's claims that the snapshot does not include yet (decision C). */
 export function useDisplayBalances() {
   const query = useBalances();
+  const queryClient = useQueryClient();
   const submissions = useClaimsStore((s) => s.submissions);
   const asOf = query.data ? Date.parse(query.data.asOf) : null;
 
@@ -23,25 +26,35 @@ export function useDisplayBalances() {
   // No claim id and no request running: we never learned whether the server created it.
   const unconfirmed = list.filter((s) => !s.claimId);
   const unresolved = unconfirmed.filter((s) => !inFlight.includes(s.key));
-  const recent = list.filter(
-    (s) => s.claimId && s.createdAt && asOf !== null && Date.parse(s.createdAt) > asOf,
-  );
+  const confirmed = list.filter((s) => s.claimId && s.createdAt);
+  const recent = confirmed.filter((s) => asOf !== null && Date.parse(s.createdAt!) > asOf);
 
+  // Follow this device's claims from Home too, not only on the status screen, so a claim that
+  // settles while the user is here refreshes the balances right away.
   const statuses = useQueries({
-    queries: recent.map((s) => ({
+    queries: confirmed.map((s) => ({
       queryKey: queryKeys.claims.detail(s.claimId!),
       queryFn: () => getClaim(s.claimId!),
+      refetchInterval: (q: { state: { data?: { status: string } } }) =>
+        q.state.data && q.state.data.status !== 'pending' ? false : CLAIM_POLL_MS,
     })),
   });
+  const statusById = new Map(confirmed.map((s, i) => [s.claimId!, statuses[i]?.data?.status]));
 
   const statusKey = statuses.map((q) => q.data?.status ?? '').join();
+  const settledCount = statuses.filter((q) => q.data && q.data.status !== 'pending').length;
+  useEffect(() => {
+    if (settledCount > 0) {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.balances.all() });
+    }
+  }, [settledCount, queryClient]);
   const balances = useMemo(() => {
     if (!query.data) return null;
-    const local: LocalClaim[] = recent.map((s, i) => ({
+    const local: LocalClaim[] = recent.map((s) => ({
       asset: s.body.asset,
       amount: s.body.amount,
       createdAt: s.createdAt!,
-      status: statuses[i]?.data?.status ?? null,
+      status: statusById.get(s.claimId!) ?? null,
     }));
     return reconcileBalances(query.data, local);
     // eslint-disable-next-line react-hooks/exhaustive-deps
