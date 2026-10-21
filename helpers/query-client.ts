@@ -5,10 +5,12 @@ import { isApiError } from '@/helpers/api/errors';
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 30_000,
-      // 4xx не повторюємо: повтор не виправить неправильний запит.
+      staleTime: 10_000,
+      // 4xx won't fix itself on retry, except 429 which tells us how long to wait.
       retry: (failureCount, error) =>
-        !(isApiError(error) && error.isClientError) && failureCount < 2,
+        failureCount < 3 && !(isApiError(error) && error.isClientError && error.code !== 'RATE_LIMITED'),
+      retryDelay: (attempt, error) =>
+        isApiError(error) && error.retryAfterMs ? error.retryAfterMs : Math.min(1000 * 2 ** attempt, 8000),
     },
   },
 });

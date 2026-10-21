@@ -92,7 +92,7 @@ A component in `screens/<section>` is used by that section only. The moment a se
 
 ## API access
 
-- Base URL and token come from `config/env.ts` (`EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_API_TOKEN`). `helpers/api/client.ts` sends the token as `Authorization: Bearer …`; change the header there if the API docs say otherwise.
+- Base URL comes from `config/env.ts` (`EXPO_PUBLIC_API_URL`, defaults to `https://task-api.cashmine.io`). The token is NOT an env var: the user enters it in the app, it is persisted in `store/auth.ts` and pushed to `helpers/api/client.ts` (`setAuthToken`) by `AppProviders`. Never put a token in code, `.env`, Vercel or CI.
 - `EXPO_PUBLIC_*` values are inlined into the JS bundle at build time and are readable by anyone who opens the site. Never commit `.env`. Mention this trade-off in the README.
 - Requests go straight from the browser, so the API must allow our origin (CORS). Check with `curl -i -H "Origin: https://example.vercel.app" …` before building screens.
 
