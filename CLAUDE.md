@@ -8,7 +8,7 @@
 
 Use the `expo` plugin skills (enabled in `.claude/settings.json`) for Expo and Expo Router work before writing code from memory.
 
-**Navigation: {{NAV}}**
+**Navigation: A — tabs: кожен таб — папка з _layout (Stack) + index; група `(tabs)`**
 
 ## Stack
 

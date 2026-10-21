@@ -1,10 +1,9 @@
 {
-  "name": "__APP_SLUG__",
+  "name": "cashmine-payback",
   "version": "1.0.0",
   "private": true,
   "main": "expo-router/entry",
   "scripts": {
-    "setup": "node scripts/setup.mjs",
     "start": "expo start --web",
     "build": "expo export -p web",
     "lint": "eslint .",

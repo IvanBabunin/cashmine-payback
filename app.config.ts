@@ -1,7 +1,7 @@
 import type { ExpoConfig } from 'expo/config';
 
-const APP_NAME = '__APP_NAME__';
-const APP_SLUG = '__APP_SLUG__';
+const APP_NAME = 'CashMine Payback';
+const APP_SLUG = 'cashmine-payback';
 
 const config: ExpoConfig = {
   name: APP_NAME,
