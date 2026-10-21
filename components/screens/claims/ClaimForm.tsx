@@ -132,6 +132,7 @@ const useStyles = makeStyles((t) => ({
     borderRadius: t.radius.md,
     borderWidth: 1,
     borderColor: t.colors.border,
+    backgroundColor: t.colors.surface,
   },
   destinationActive: { borderColor: t.colors.primary },
   summary: {

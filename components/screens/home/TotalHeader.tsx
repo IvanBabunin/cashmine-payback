@@ -39,7 +39,7 @@ export function TotalHeader({
       <Text variant="label" color="textMuted">
         {t('total')}
       </Text>
-      <Text variant="title" selectable>
+      <Text variant="title" selectable tabular>
         {formatUsd(totalCents)}
       </Text>
       <View style={styles.row}>
@@ -51,7 +51,7 @@ export function TotalHeader({
               : t('updated', { ago })}
         </Text>
         {refreshing ? (
-          <ActivityIndicator color={theme.colors.primary} />
+          <ActivityIndicator color={theme.colors.accent} />
         ) : (
           <Pressable
             accessibilityRole="button"
@@ -59,7 +59,7 @@ export function TotalHeader({
             onPress={onRefresh}
             hitSlop={12}
           >
-            <MaterialDesignIcons name="refresh" size={20} color={theme.colors.primary} />
+            <MaterialDesignIcons name="refresh" size={20} color={theme.colors.accent} />
           </Pressable>
         )}
       </View>

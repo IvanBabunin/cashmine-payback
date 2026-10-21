@@ -7,7 +7,7 @@ export function LoadingState() {
   const theme = useTheme();
   return (
     <View style={styles.root}>
-      <ActivityIndicator color={theme.colors.primary} size="large" />
+      <ActivityIndicator color={theme.colors.accent} size="large" />
     </View>
   );
 }

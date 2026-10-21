@@ -14,7 +14,7 @@ export default function NotFoundScreen() {
         title={t('notFound.title')}
         action={
           <Link href={ROUTES.HOME}>
-            <Text color="primary">{t('notFound.back')}</Text>
+            <Text color="accent">{t('notFound.back')}</Text>
           </Link>
         }
       />

@@ -1,3 +1,10 @@
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  useFonts,
+} from '@expo-google-fonts/inter';
 import { Stack } from 'expo-router';
 
 import { AppFrame } from '@/components/shared/layout';
@@ -5,6 +12,8 @@ import { AppProviders } from '@/providers/AppProviders';
 import { useAuthStore } from '@/store/auth';
 
 export default function RootLayout() {
+  // Not blocking on load: text renders in the fallback face and swaps in when Inter arrives.
+  useFonts({ Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold });
   return (
     <AppProviders>
       <AppFrame>

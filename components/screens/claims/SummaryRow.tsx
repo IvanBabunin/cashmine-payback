@@ -16,7 +16,7 @@ export function SummaryRow({ label, value, strong }: SummaryRowProps) {
       <Text variant="label" color="textMuted">
         {label}
       </Text>
-      <Text variant={strong ? 'subtitle' : 'body'} style={styles.value} selectable>
+      <Text variant={strong ? 'subtitle' : 'body'} style={styles.value} selectable tabular>
         {value}
       </Text>
     </View>

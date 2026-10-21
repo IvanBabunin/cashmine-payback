@@ -47,7 +47,7 @@ const useStyles = makeStyles((t) => ({
     borderRadius: t.radius.md,
     borderWidth: 1,
     borderColor: t.colors.border,
-    backgroundColor: t.colors.surface,
+    backgroundColor: t.colors.field,
     color: t.colors.text,
     ...t.typography.body,
   },

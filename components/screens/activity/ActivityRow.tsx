@@ -36,7 +36,7 @@ export function ActivityRow({ item }: ActivityRowProps) {
         </Text>
       </View>
       <View style={styles.right}>
-        <Text variant="label" color={negative ? 'text' : 'success'} selectable>
+        <Text variant="label" color={negative ? 'text' : 'success'} selectable tabular>
           {negative ? item.amount : `+${item.amount}`} {item.asset}
         </Text>
         <Text variant="caption" color={STATUS_COLOR[item.status]}>

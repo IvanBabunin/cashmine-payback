@@ -1,47 +1,44 @@
 /**
- * Дизайн-токени. Компоненти беруть кольори й відступи ТІЛЬКИ звідси.
- * Під кожен проєкт міняєш палітру тут — решта підхопиться.
+ * Design tokens. Components take colors and spacing ONLY from here.
+ * Palette follows the CashMine web product (cashmine.io): warm neutrals, brand orange.
  */
-const palette = {
-  ink: '#15171A',
-  graphite: '#2A2E33',
-  slate: '#6B7280',
-  mist: '#E5E7EB',
-  paper: '#FFFFFF',
-  night: '#101214',
-  accent: '#2F6FEB',
-  accentDark: '#5B8EF0',
-  success: '#1F9D55',
-  warning: '#C27803',
-  danger: '#D93636',
+const brand = {
+  orange: '#F58A3A',
+  ink: '#211D19',
 };
 
 export const lightColors = {
-  background: palette.paper,
-  surface: '#F6F7F9',
-  text: palette.ink,
-  textMuted: palette.slate,
-  border: palette.mist,
-  primary: palette.accent,
-  onPrimary: palette.paper,
-  success: palette.success,
-  warning: palette.warning,
-  danger: palette.danger,
+  background: '#F5F2EE',
+  surface: '#FFFFFF',
+  field: '#EFEBE6',
+  secondaryButton: '#E7E1DA',
+  text: brand.ink,
+  textMuted: '#625B54',
+  border: '#D8D0C7',
+  primary: brand.orange,
+  onPrimary: brand.ink,
+  accent: '#A94708',
+  success: '#21764B',
+  warning: '#8A5A00',
+  danger: '#B83B38',
 };
 
 export type Colors = typeof lightColors;
 
 export const darkColors: Colors = {
-  background: palette.night,
-  surface: '#1A1D21',
-  text: '#F3F4F6',
-  textMuted: '#9CA3AF',
-  border: palette.graphite,
-  primary: palette.accentDark,
-  onPrimary: palette.night,
-  success: '#34C77B',
+  background: '#0D0C0B',
+  surface: '#161412',
+  field: '#1B1815',
+  secondaryButton: '#211D19',
+  text: '#F5F2EE',
+  textMuted: '#C0B8B0',
+  border: '#FFFFFF13',
+  primary: brand.orange,
+  onPrimary: brand.ink,
+  accent: brand.orange,
+  success: '#47C98B',
   warning: '#E3A008',
-  danger: '#F05252',
+  danger: '#EF6B68',
 };
 
 export const spacing = {
@@ -54,18 +51,18 @@ export const spacing = {
 } as const;
 
 export const radius = {
-  sm: 6,
-  md: 10,
+  sm: 4,
+  md: 12,
   lg: 16,
   full: 999,
 } as const;
 
 export const typography = {
-  title: { fontSize: 28, lineHeight: 34, fontWeight: '700' },
-  subtitle: { fontSize: 20, lineHeight: 26, fontWeight: '600' },
-  body: { fontSize: 16, lineHeight: 22, fontWeight: '400' },
-  label: { fontSize: 14, lineHeight: 18, fontWeight: '500' },
-  caption: { fontSize: 12, lineHeight: 16, fontWeight: '400' },
+  title: { fontFamily: 'Inter_700Bold', fontSize: 32, lineHeight: 38, letterSpacing: -0.8 },
+  subtitle: { fontFamily: 'Inter_600SemiBold', fontSize: 18, lineHeight: 24, letterSpacing: -0.2 },
+  body: { fontFamily: 'Inter_400Regular', fontSize: 16, lineHeight: 22 },
+  label: { fontFamily: 'Inter_500Medium', fontSize: 14, lineHeight: 18 },
+  caption: { fontFamily: 'Inter_400Regular', fontSize: 12, lineHeight: 16 },
 } as const;
 
 export const layout = {

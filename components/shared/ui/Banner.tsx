@@ -13,7 +13,7 @@ type BannerProps = {
 };
 
 const TONE_COLOR: Record<NonNullable<BannerProps['tone']>, keyof Colors> = {
-  info: 'primary',
+  info: 'accent',
   warning: 'warning',
   danger: 'danger',
   success: 'success',
@@ -44,7 +44,7 @@ const useStyles = makeStyles((t) => ({
     borderWidth: 1,
     backgroundColor: t.colors.surface,
   },
-  info: { borderColor: t.colors.primary },
+  info: { borderColor: t.colors.accent },
   warning: { borderColor: t.colors.warning },
   danger: { borderColor: t.colors.danger },
   success: { borderColor: t.colors.success },

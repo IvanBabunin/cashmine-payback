@@ -21,7 +21,7 @@ export function Button({
   const styles = useStyles();
   const theme = useTheme();
   const isDisabled = disabled || loading;
-  const textColor = variant === 'primary' ? 'onPrimary' : 'primary';
+  const textColor = variant === 'primary' ? 'onPrimary' : 'text';
 
   return (
     <Pressable
@@ -57,7 +57,7 @@ const useStyles = makeStyles((t) => ({
     justifyContent: 'center',
   },
   primary: { backgroundColor: t.colors.primary },
-  secondary: { borderWidth: 1, borderColor: t.colors.border, backgroundColor: t.colors.surface },
+  secondary: { backgroundColor: t.colors.secondaryButton },
   ghost: { backgroundColor: 'transparent' },
   pressed: { opacity: 0.8 },
   disabled: { opacity: 0.5 },

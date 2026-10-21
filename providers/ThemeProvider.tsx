@@ -21,9 +21,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     ...base,
     colors: {
       ...base.colors,
-      primary: theme.colors.primary,
+      primary: theme.colors.accent,
       background: theme.colors.background,
-      card: theme.colors.background,
+      card: theme.colors.surface,
       text: theme.colors.text,
       border: theme.colors.border,
     },

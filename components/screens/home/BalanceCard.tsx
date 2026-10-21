@@ -26,7 +26,7 @@ export function BalanceCard({ balance, onClaim }: BalanceCardProps) {
       <Row label={t('pending')} value={fmt(balance.pending)} />
       <Row label={t('claiming')} value={fmt(balance.claiming)} />
       {balance.adjusted ? (
-        <Text variant="caption" color="primary">
+        <Text variant="caption" color="accent">
           {t('adjusted')}
         </Text>
       ) : null}
@@ -47,7 +47,7 @@ function Row({ label, value, strong }: { label: string; value: string; strong?: 
       <Text variant="label" color="textMuted">
         {label}
       </Text>
-      <Text variant={strong ? 'label' : 'body'} style={styles.value} selectable>
+      <Text variant={strong ? 'label' : 'body'} style={styles.value} selectable tabular>
         {value}
       </Text>
     </View>

@@ -22,7 +22,7 @@ export function ClaimStatusCard({ claim }: ClaimStatusCardProps) {
     <View style={styles.root}>
       <View style={styles.status}>
         {claim.status === 'pending' ? (
-          <ActivityIndicator size="large" color={theme.colors.primary} />
+          <ActivityIndicator size="large" color={theme.colors.accent} />
         ) : (
           <MaterialDesignIcons
             name={claim.status === 'completed' ? 'check-circle' : 'alert-circle'}

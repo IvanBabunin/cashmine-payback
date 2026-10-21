@@ -18,7 +18,7 @@ export function AppFrame({ children }: AppFrameProps) {
 }
 
 const useStyles = makeStyles((t) => ({
-  root: { flex: 1, backgroundColor: t.colors.surface },
+  root: { flex: 1, backgroundColor: t.colors.field },
   frame: {
     flex: 1,
     width: '100%',

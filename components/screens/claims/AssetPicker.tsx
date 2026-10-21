@@ -42,9 +42,7 @@ const useStyles = makeStyles((t) => ({
     paddingHorizontal: t.spacing.lg,
     justifyContent: 'center',
     borderRadius: t.radius.full,
-    borderWidth: 1,
-    borderColor: t.colors.border,
-    backgroundColor: t.colors.surface,
+    backgroundColor: t.colors.field,
   },
-  active: { backgroundColor: t.colors.primary, borderColor: t.colors.primary },
+  active: { backgroundColor: t.colors.primary },
 }));
