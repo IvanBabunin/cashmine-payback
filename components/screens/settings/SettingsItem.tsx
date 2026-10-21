@@ -28,6 +28,8 @@ const useStyles = makeStyles((t) => ({
     minHeight: 52,
     paddingHorizontal: t.spacing.lg,
     borderRadius: t.radius.md,
+    borderWidth: 1,
+    borderColor: t.colors.border,
     backgroundColor: t.colors.surface,
     flexDirection: 'row',
     alignItems: 'center',

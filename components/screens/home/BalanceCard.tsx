@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { View, type TextStyle } from 'react-native';
 
 import { Button, Text } from '@/components/shared/ui';
 import { formatAmount, formatUsd } from '@/helpers/format/amount';
@@ -31,14 +31,21 @@ export function BalanceCard({ balance, onClaim }: BalanceCardProps) {
       </View>
       <View style={styles.stats}>
         <Stat label={t('available')} units={balance.available} decimals={balance.decimals} />
-        <Stat label={t('pending')} units={balance.pending} decimals={balance.decimals} highlight />
-        <Stat
-          label={t('claiming')}
-          units={balance.claiming}
-          decimals={balance.decimals}
-          highlight
-          last
-        />
+        <View style={styles.statRow}>
+          <Stat
+            label={t('pending')}
+            units={balance.pending}
+            decimals={balance.decimals}
+            highlight
+            divided
+          />
+          <Stat
+            label={t('claiming')}
+            units={balance.claiming}
+            decimals={balance.decimals}
+            highlight
+          />
+        </View>
       </View>
       {balance.adjusted ? (
         <Text variant="caption" color="accent">
@@ -61,14 +68,15 @@ type StatProps = {
   decimals: number;
   /** Non-zero pending/claiming amounts are in motion, so they take the accent colour. */
   highlight?: boolean;
-  last?: boolean;
+  /** Draws the divider to the next column. */
+  divided?: boolean;
 };
 
-function Stat({ label, units, decimals, highlight, last }: StatProps) {
+function Stat({ label, units, decimals, highlight, divided }: StatProps) {
   const styles = useStyles();
   const zero = units === 0n;
   return (
-    <View style={[styles.stat, !last && styles.statDivider]}>
+    <View style={[styles.stat, divided && styles.statDivider]}>
       <Text variant="caption" color="textMuted">
         {label}
       </Text>
@@ -77,8 +85,7 @@ function Stat({ label, units, decimals, highlight, last }: StatProps) {
         color={zero ? 'textMuted' : highlight ? 'accent' : 'text'}
         tabular
         selectable
-        numberOfLines={1}
-        adjustsFontSizeToFit
+        style={styles.value}
       >
         {formatAmount(units, decimals)}
       </Text>
@@ -98,12 +105,12 @@ const useStyles = makeStyles((t) => ({
   head: { flexDirection: 'row', alignItems: 'center', gap: t.spacing.md },
   flex: { flex: 1 },
   stats: {
-    flexDirection: 'row',
     borderRadius: t.radius.md,
     borderWidth: 1,
     borderColor: t.colors.border,
     backgroundColor: t.colors.inset,
   },
+  statRow: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: t.colors.border },
   stat: {
     flex: 1,
     minWidth: 0,
@@ -112,4 +119,6 @@ const useStyles = makeStyles((t) => ({
     paddingHorizontal: t.spacing.md,
   },
   statDivider: { borderRightWidth: 1, borderRightColor: t.colors.border },
+  // Never truncate money: 18-decimal amounts wrap inside the column instead of ending in "…".
+  value: { wordBreak: 'break-all' } as TextStyle,
 }));

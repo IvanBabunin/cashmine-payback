@@ -137,8 +137,10 @@ const useStyles = makeStyles((t) => ({
   destinationActive: { borderColor: t.colors.primary },
   summary: {
     gap: t.spacing.sm,
-    padding: t.spacing.md,
-    borderRadius: t.radius.md,
+    padding: t.spacing.lg,
+    borderRadius: t.radius.lg,
+    borderWidth: 1,
+    borderColor: t.colors.border,
     backgroundColor: t.colors.surface,
   },
 }));

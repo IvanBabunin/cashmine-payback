@@ -60,8 +60,10 @@ const useStyles = makeStyles((t) => ({
   status: { alignItems: 'center', gap: t.spacing.sm, paddingTop: t.spacing.xl },
   summary: {
     gap: t.spacing.sm,
-    padding: t.spacing.md,
-    borderRadius: t.radius.md,
+    padding: t.spacing.lg,
+    borderRadius: t.radius.lg,
+    borderWidth: 1,
+    borderColor: t.colors.border,
     backgroundColor: t.colors.surface,
   },
 }));
