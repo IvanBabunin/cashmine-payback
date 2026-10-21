@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test -- --ci
+      - run: npm run build
+        env:
+          EXPO_PUBLIC_API_URL: https://api.example.com
+
+  deploy:
+    needs: check
+    # Skipped until the repo has the Vercel variables, so a fresh copy of the template stays green.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.VERCEL_PROJECT_ID != ''
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      # Pulls the Production env vars (EXPO_PUBLIC_*) from Vercel; the build inlines them into the bundle.
+      - run: npx vercel@latest pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - run: npx vercel@latest build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - id: deploy
+        run: echo "url=$(npx vercel@latest deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})" >> "$GITHUB_OUTPUT"

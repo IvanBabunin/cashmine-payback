@@ -1,0 +1,8 @@
+{
+  "title": "Settings",
+  "theme": {
+    "system": "System theme",
+    "light": "Light",
+    "dark": "Dark"
+  }
+}
