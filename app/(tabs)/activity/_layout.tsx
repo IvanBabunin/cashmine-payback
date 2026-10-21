@@ -5,7 +5,7 @@ export default function ActivityLayout() {
   const { t } = useTranslation('activity');
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: t('title') }} />
+      <Stack.Screen name="index" options={{ title: t('title'), headerShown: false }} />
     </Stack>
   );
 }

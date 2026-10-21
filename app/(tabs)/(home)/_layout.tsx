@@ -5,7 +5,7 @@ export default function HomeLayout() {
   const { t } = useTranslation('home');
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: t('title') }} />
+      <Stack.Screen name="index" options={{ title: t('title'), headerShown: false }} />
     </Stack>
   );
 }

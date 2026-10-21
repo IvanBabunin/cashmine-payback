@@ -18,6 +18,7 @@
 - **Navigation:** tabs (Balances, Activity, Settings), `/claim?asset=…`, and `/claims/[claimId]`. Every screen reads its route params, so refresh and deep links work.
 - **Refresh rates:** balances refetch every 15 s (the snapshot interval), and an open claim refetches every 2 s until it settles.
 - **Look:** palette, radii and font (Inter) come from the tokens cashmine.io publishes in its stylesheets. No logo is used.
+- **Redesign from a mockup:** I took a structure from a mockup I made with another Claude chat (total card, share bar, asset cards with a stat grid, tonal per-asset claim button). I dropped its sparklines and 24h % changes, because the API has no price history and showing them would mean inventing numbers, and "Claim all", because there is no batch claim endpoint. I also dropped its glows, grid backdrop and glass nav, which read as decoration.
 
 ## Working with AI
 
@@ -34,6 +35,5 @@ All in `ai-logs/` (one Claude Code session; search for the quoted phrases).
 - **Changing the token drops unconfirmed claims:** saved claims whose result is unknown are cleared too.
 - **Clock skew:** "Updated Xs ago" compares the server's `asOf` with the phone's clock, clamped at 0.
 - **Not a real modal on web:** the claim screen opens full-screen rather than as a sheet.
-- **Untested:** Done on a claim status page opened directly from a link.
 - **Test gaps:** unit tests cover amount logic and reconciliation only. No component or end-to-end tests.
 - **Other gaps:** no `DESIGN.md`, English only, and Activity does not link a reversal to its accrual.

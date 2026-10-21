@@ -1,10 +1,14 @@
 {
   "title": "Settings",
-  "theme": {
-    "system": "System theme",
+  "token": "API token",
+  "changeToken": "Change token",
+  "account": "Account",
+  "appearance": "Appearance",
+  "themeLabel": "Theme",
+  "themeShort": {
+    "system": "System",
     "light": "Light",
     "dark": "Dark"
   },
-  "token": "API token",
-  "changeToken": "Change token"
+  "tokenHint": "Stored only in this browser."
 }

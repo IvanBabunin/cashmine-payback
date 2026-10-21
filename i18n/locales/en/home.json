@@ -17,5 +17,10 @@
   "ago": {
     "seconds": "{{count}}s ago",
     "minutes": "{{count}} min ago"
-  }
+  },
+  "assets": "Assets",
+  "assetCount": "{{count}} assets",
+  "claimAsset": "Claim {{asset}}",
+  "nothingToClaim": "Nothing to claim",
+  "refresh": "Refresh balances"
 }
