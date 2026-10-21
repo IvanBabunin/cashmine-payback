@@ -27,14 +27,15 @@ Optional: copy `.env.example` to `.env` to point `EXPO_PUBLIC_API_URL` at anothe
 
 ## What works
 
-- **Balances:** available, pending and claiming per asset, USD value, total in USD, "Updated Xs ago". Loading, error with retry, refresh button; refetches every 15 s.
+- **Balances:** available, pending and claiming per asset, USD value, total in USD, "Updated Xs ago". Loading, error with retry, refresh button; refetches just after each 15 s server snapshot.
 - **Claim:** pick an asset, enter an amount or tap Max, choose a destination, see fee and amount received, review, confirm.
   - Input is validated against the API rules: format, decimals, minimum, available, more than the fee.
   - The status screen follows the claim until it completes or fails, with the reason.
 - **Balance right after a claim:** reconciled against the snapshot time, so it drops once and does not jump back.
 - **Unknown claim results:** safe retry with the same idempotency key, surviving a reload.
 - **Activity:** paginated history of accruals, reversals and claims.
-- **Tests:** unit tests for parsing, validation, fee, USD totals and balance reconciliation.
+- **Settings:** change the API token, and pick the System, Light or Dark theme.
+- **Tests:** unit tests for parsing, validation, fee, USD totals, balance reconciliation and 401 handling.
 - **Deploy:** GitHub Actions runs lint, typecheck, tests and build, then deploys to Vercel on push to `main`.
 
 Decisions, AI notes and known issues: [NOTES.md](NOTES.md). AI conversations: [ai-logs/](ai-logs/).
