@@ -34,8 +34,14 @@ function buildUrl(path: string, query?: Query) {
   return qs ? `${url}?${qs}` : url;
 }
 
-async function request<T>(method: string, path: string, options: RequestOptions = {}): Promise<T> {
+async function request<T>(
+  method: string,
+  path: string,
+  options: RequestOptions = {},
+  isRetry = false,
+): Promise<T> {
   const { body, query, headers, ...init } = options;
+  const sentToken = authToken;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
@@ -48,7 +54,7 @@ async function request<T>(method: string, path: string, options: RequestOptions 
       headers: {
         Accept: 'application/json',
         ...(body !== undefined && { 'Content-Type': 'application/json' }),
-        ...(authToken && { Authorization: `Bearer ${authToken}` }),
+        ...(sentToken && { Authorization: `Bearer ${sentToken}` }),
         ...headers,
       },
       body: body === undefined ? undefined : JSON.stringify(body),
@@ -61,7 +67,13 @@ async function request<T>(method: string, path: string, options: RequestOptions 
 
   if (!res.ok) {
     const error = await ApiError.fromResponse(res);
-    if (error.status === 401) onUnauthorized?.();
+    if (error.status === 401) {
+      // The API says any request can fail, so a single 401 is not proof the token is bad.
+      // Repeating is safe: GETs are reads and claim POSTs carry their Idempotency-Key.
+      if (!isRetry) return request<T>(method, path, options, true);
+      // Ignore a 401 for a token the user has already replaced.
+      if (sentToken === authToken) onUnauthorized?.();
+    }
     throw error;
   }
 

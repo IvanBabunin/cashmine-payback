@@ -7,7 +7,7 @@ const brand = {
   ink: '#211D19',
 };
 
-export const lightColors = {
+const lightColors = {
   background: '#F5F2EE',
   surface: '#FFFFFF',
   field: '#EFEBE6',
@@ -28,7 +28,7 @@ export const lightColors = {
 
 export type Colors = typeof lightColors;
 
-export const darkColors: Colors = {
+const darkColors: Colors = {
   background: '#0D0C0B',
   surface: '#161412',
   field: '#1B1815',

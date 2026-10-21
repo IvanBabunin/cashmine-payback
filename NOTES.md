@@ -14,7 +14,7 @@
 
 **Other decisions.**
 
-- **Token:** asked for on first open and saved in localStorage (`store/auth.ts`). Settings → Change token clears it, along with cached data and saved claims. A 401 sends the user back to the token screen with a message. It is never in env vars, the repo or the build (checked by searching `dist/` and the git history).
+- **Token:** asked for on first open and saved in localStorage (`store/auth.ts`). Settings → Change token clears it, along with cached data and saved claims. A 401 is retried once (the API says any request can fail); only a second 401 for the token still in use sends the user back to the token screen with a message. It is never in env vars, the repo or the build (checked by searching `dist/` and the git history).
 - **Navigation:** tabs (Balances, Activity, Settings), `/claim?asset=…`, and `/claims/[claimId]`. Every screen reads its route params, so refresh and deep links work.
 - **Refresh rates:** balances refetch every 15 s (the snapshot interval), and an open claim refetches every 2 s until it settles.
 - **Look:** palette, radii and font (Inter) come from the tokens cashmine.io publishes in its stylesheets. No logo is used.
@@ -30,8 +30,7 @@ All in `ai-logs/` (one Claude Code session; search for the quoted phrases).
 
 ## Not done / known issues
 
-- **Token wiped once:** in a local build, the saved token was gone once and I couldn't reproduce it. Storage loads synchronously and the API returned no 401 in testing. Next: log why the token gets cleared.
-- **Any 401 logs out:** a single 401 clears the token. That is right for an expired token but harsh for a stray one. Next: confirm with a second request before logging out.
+- **Token wiped twice in local testing:** the saved token was cleared twice and I could not catch the cause with logging. The likeliest one, a stray 401 logging the user out, is now handled by retrying once (`helpers/api/client.test.ts`). Next: keep the logging in and confirm.
 - **Changing the token drops unconfirmed claims:** saved claims whose result is unknown are cleared too.
 - **Clock skew:** "Updated Xs ago" compares the server's `asOf` with the phone's clock, clamped at 0.
 - **Not a real modal on web:** the claim screen opens full-screen rather than as a sheet.

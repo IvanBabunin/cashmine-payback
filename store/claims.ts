@@ -8,7 +8,7 @@ import type { CreateClaimBody } from '@/types/models/claim';
  * Idempotency-Key and body so an unknown outcome can be retried safely after a reload, plus the
  * id/createdAt the server assigned (immutable) so Home can reconcile balances against `asOf`.
  */
-export type Submission = {
+type Submission = {
   key: string;
   body: CreateClaimBody;
   submittedAt: string;

@@ -14,7 +14,7 @@ export function parseAmount(input: string, decimals: number): bigint | null {
 }
 
 /** Parses a decimal string from the API, keeping its own scale (used for prices). */
-export function parseDecimal(value: string): { units: bigint; scale: number } {
+function parseDecimal(value: string): { units: bigint; scale: number } {
   if (!SIGNED_RE.test(value)) throw new Error(`Invalid decimal: ${value}`);
   const negative = value.startsWith('-');
   const [whole, fraction = ''] = value.replace('-', '').split('.');
@@ -39,7 +39,7 @@ export function formatAmount(units: bigint, decimals: number): string {
   return `${negative ? '-' : ''}${whole}${fraction ? `.${fraction}` : ''}`;
 }
 
-export type ClaimAmountError =
+type ClaimAmountError =
   'required' | 'format' | 'tooManyDecimals' | 'belowMin' | 'aboveAvailable' | 'notAboveFee';
 
 export type ClaimRules = {
