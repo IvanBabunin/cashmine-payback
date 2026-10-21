@@ -5,7 +5,14 @@ import { reconcileBalances, totalUsdCents, type LocalClaim } from './reconcile-b
 const snapshot = {
   asOf: '2026-10-21T10:00:00.000Z',
   items: [
-    { asset: 'ETH', decimals: 18, available: '1.5', pending: '0.1', claiming: '0', usdPrice: '2000' },
+    {
+      asset: 'ETH',
+      decimals: 18,
+      available: '1.5',
+      pending: '0.1',
+      claiming: '0',
+      usdPrice: '2000',
+    },
     { asset: 'USDT', decimals: 6, available: '10', pending: '0', claiming: '0', usdPrice: '1' },
   ],
 };

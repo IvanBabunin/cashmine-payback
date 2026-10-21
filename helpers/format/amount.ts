@@ -40,12 +40,7 @@ export function formatAmount(units: bigint, decimals: number): string {
 }
 
 export type ClaimAmountError =
-  | 'required'
-  | 'format'
-  | 'tooManyDecimals'
-  | 'belowMin'
-  | 'aboveAvailable'
-  | 'notAboveFee';
+  'required' | 'format' | 'tooManyDecimals' | 'belowMin' | 'aboveAvailable' | 'notAboveFee';
 
 export type ClaimRules = {
   decimals: number;

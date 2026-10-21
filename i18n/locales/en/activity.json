@@ -1,0 +1,16 @@
+{
+  "title": "Activity",
+  "empty": "No activity yet",
+  "loadMore": "Load more",
+  "type": {
+    "accrual": "Payback",
+    "reversal": "Reversal",
+    "claim": "Claim"
+  },
+  "status": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "completed": "Completed",
+    "failed": "Failed"
+  }
+}

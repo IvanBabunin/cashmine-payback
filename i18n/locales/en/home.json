@@ -1,0 +1,21 @@
+{
+  "title": "Balances",
+  "total": "Total payback",
+  "updated": "Updated {{ago}}",
+  "updatedJustNow": "Updated just now",
+  "stale": "Couldn't refresh. Showing data from {{ago}}.",
+  "empty": "No payback yet",
+  "emptyDescription": "Trade on a connected exchange to start earning payback.",
+  "available": "Available",
+  "pending": "Pending",
+  "claiming": "Claiming",
+  "claim": "Claim",
+  "adjusted": "Includes your recent claim. The next update will confirm it.",
+  "unresolvedTitle": "We couldn't confirm your claim of {{amount}} {{asset}}",
+  "unresolvedDescription": "It may or may not have gone through. Checking again is safe and never creates a second claim.",
+  "unresolvedAction": "Check again",
+  "ago": {
+    "seconds": "{{count}}s ago",
+    "minutes": "{{count}} min ago"
+  }
+}

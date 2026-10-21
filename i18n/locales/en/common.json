@@ -3,24 +3,20 @@
     "save": "Save",
     "cancel": "Cancel",
     "retry": "Try again",
-    "close": "Close"
+    "close": "Close",
+    "refresh": "Refresh"
   },
   "errors": {
     "generic": "Something went wrong. Try again.",
-    "network": "Can't reach the server."
+    "network": "Can't reach the server. Check your connection.",
+    "server": "The server had a problem. Try again.",
+    "rateLimited": "Too many requests. Wait a moment and try again.",
+    "notFound": "Not found."
   },
   "tabs": {
-    "home": "Home",
+    "home": "Balances",
+    "activity": "Activity",
     "settings": "Settings"
-  },
-  "home": {
-    "title": "Home",
-    "empty": "Nothing here yet",
-    "openDetails": "Open details"
-  },
-  "details": {
-    "title": "Details",
-    "id": "ID: {{id}}"
   },
   "notFound": {
     "title": "Page not found",

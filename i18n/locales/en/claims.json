@@ -1,0 +1,42 @@
+{
+  "title": "Claim payback",
+  "statusTitle": "Claim",
+  "asset": "Asset",
+  "amount": "Amount",
+  "amountPlaceholder": "0.00",
+  "max": "Max",
+  "available": "Available: {{amount}} {{asset}}",
+  "min": "Minimum: {{amount}} {{asset}}",
+  "destination": "Send to",
+  "fee": "Fee",
+  "receive": "You receive",
+  "continue": "Review",
+  "back": "Edit",
+  "confirm": "Confirm claim",
+  "reviewTitle": "Check your claim",
+  "notEnough": "You need at least {{amount}} {{asset}} available to claim.",
+  "noDestinations": "No destination is set up for {{asset}}.",
+  "errors": {
+    "required": "Enter an amount.",
+    "format": "Use digits with an optional dot, like 0.5.",
+    "tooManyDecimals": "{{asset}} allows at most {{decimals}} decimal places.",
+    "belowMin": "The minimum is {{min}} {{asset}}.",
+    "aboveAvailable": "You only have {{available}} {{asset}} available.",
+    "notAboveFee": "The amount must be more than the {{fee}} {{asset}} fee."
+  },
+  "rejected": "The claim was not created: {{message}}",
+  "unknownTitle": "We couldn't confirm your claim",
+  "unknownDescription": "The connection dropped before we got an answer, so it may or may not have gone through. Checking again is safe: it never creates a second claim.",
+  "unknownAction": "Check again",
+  "status": {
+    "pending": "Processing",
+    "pendingDescription": "This usually takes about 20 seconds.",
+    "completed": "Claim completed",
+    "completedDescription": "{{amount}} {{asset}} is on its way.",
+    "failed": "Claim failed",
+    "failedDescription": "The amount is back in your available balance."
+  },
+  "reason": "Reason: {{reason}}",
+  "done": "Done",
+  "id": "Claim ID"
+}

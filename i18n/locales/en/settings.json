@@ -4,5 +4,7 @@
     "system": "System theme",
     "light": "Light",
     "dark": "Dark"
-  }
+  },
+  "token": "API token",
+  "changeToken": "Change token"
 }

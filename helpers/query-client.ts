@@ -8,9 +8,12 @@ export const queryClient = new QueryClient({
       staleTime: 10_000,
       // 4xx won't fix itself on retry, except 429 which tells us how long to wait.
       retry: (failureCount, error) =>
-        failureCount < 3 && !(isApiError(error) && error.isClientError && error.code !== 'RATE_LIMITED'),
+        failureCount < 3 &&
+        !(isApiError(error) && error.isClientError && error.code !== 'RATE_LIMITED'),
       retryDelay: (attempt, error) =>
-        isApiError(error) && error.retryAfterMs ? error.retryAfterMs : Math.min(1000 * 2 ** attempt, 8000),
+        isApiError(error) && error.retryAfterMs
+          ? error.retryAfterMs
+          : Math.min(1000 * 2 ** attempt, 8000),
     },
   },
 });

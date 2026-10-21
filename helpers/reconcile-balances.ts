@@ -27,7 +27,10 @@ export type DisplayBalance = {
  * Once a snapshot is newer than the claim the server already counts it, so we stop adjusting.
  * The balance therefore drops once and never jumps back because of a stale snapshot.
  */
-export function reconcileBalances(snapshot: BalancesResponse, claims: LocalClaim[]): DisplayBalance[] {
+export function reconcileBalances(
+  snapshot: BalancesResponse,
+  claims: LocalClaim[],
+): DisplayBalance[] {
   const asOf = Date.parse(snapshot.asOf);
   return snapshot.items.map((item) => {
     let available = toUnits(item.available, item.decimals);

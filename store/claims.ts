@@ -34,7 +34,13 @@ export const useClaimsStore = create<ClaimsState>()(
         set((s) => ({
           submissions: {
             ...s.submissions,
-            [key]: { key, body, submittedAt: new Date().toISOString(), claimId: null, createdAt: null },
+            [key]: {
+              key,
+              body,
+              submittedAt: new Date().toISOString(),
+              claimId: null,
+              createdAt: null,
+            },
           },
         })),
       confirm: (key, claimId, createdAt) =>

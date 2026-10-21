@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ScrollView, View, type ViewStyle } from 'react-native';
+import { ScrollView, View, type ScrollViewProps, type ViewStyle } from 'react-native';
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
 
 import { makeStyles } from '@/theme';
@@ -11,6 +11,7 @@ type ScreenProps = {
   /** Коли над екраном є хедер навігації, верхній відступ не потрібен. */
   edges?: Edge[];
   contentStyle?: ViewStyle;
+  refreshControl?: ScrollViewProps['refreshControl'];
 };
 
 export function Screen({
@@ -19,6 +20,7 @@ export function Screen({
   padded = true,
   edges = ['bottom'],
   contentStyle,
+  refreshControl,
 }: ScreenProps) {
   const styles = useStyles();
   const content = [padded && styles.padded, contentStyle];
@@ -30,6 +32,7 @@ export function Screen({
           contentContainerStyle={content}
           keyboardShouldPersistTaps="handled"
           contentInsetAdjustmentBehavior="automatic"
+          refreshControl={refreshControl}
         >
           {children}
         </ScrollView>

@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { TabBarIcon } from '@/components/shared/layout';
 
-// Кожен таб — окрема папка з _layout (Stack) та index.
-// Перший таб у дужках, щоб він відкривався за адресою "/".
+// The first tab is a group so it lives at "/".
 export default function TabsLayout() {
   const { t } = useTranslation();
   return (
@@ -13,7 +12,14 @@ export default function TabsLayout() {
         name="(home)"
         options={{
           title: t('tabs.home'),
-          tabBarIcon: ({ color }) => <TabBarIcon name="home-outline" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="wallet-outline" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="activity"
+        options={{
+          title: t('tabs.activity'),
+          tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />,
         }}
       />
       <Tabs.Screen

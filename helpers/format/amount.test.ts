@@ -75,7 +75,9 @@ describe('validateClaimAmount', () => {
 
 describe('fee and totals', () => {
   it('subtracts the fee from the claimed amount', () => {
-    expect(formatAmount(receiveAmount(toUnits('0.5', 18), toUnits('0.0012', 18)), 18)).toBe('0.4988');
+    expect(formatAmount(receiveAmount(toUnits('0.5', 18), toUnits('0.0012', 18)), 18)).toBe(
+      '0.4988',
+    );
   });
 
   it('computes USD in cents with half-up rounding', () => {
