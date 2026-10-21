@@ -2,8 +2,14 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, RefreshControl, View } from 'react-native';
 
 import { ActivityRow } from '@/components/screens/activity/ActivityRow';
-import { EmptyState, ErrorState, LoadingState, Screen } from '@/components/shared/layout';
-import { Button, Text } from '@/components/shared/ui';
+import {
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  Screen,
+  ScreenTitle,
+} from '@/components/shared/layout';
+import { Button } from '@/components/shared/ui';
 import { useActivity } from '@/hooks/api/activity/useActivity';
 import { errorMessageKey } from '@/helpers/api/errors';
 import { makeStyles } from '@/theme';
@@ -14,9 +20,9 @@ export default function ActivityScreen() {
   const query = useActivity();
   const items = query.data?.pages.flatMap((p) => p.items) ?? [];
   const title = (
-    <Text variant="title" style={styles.title}>
-      {t('title')}
-    </Text>
+    <View style={styles.title}>
+      <ScreenTitle title={t('title')} />
+    </View>
   );
 
   if (query.isPending) {
@@ -86,7 +92,7 @@ export default function ActivityScreen() {
 // Rows sit in one bordered card: side borders on every cell, rounded top and bottom on the ends.
 const useStyles = makeStyles((t) => ({
   list: { padding: t.spacing.lg },
-  title: { paddingTop: t.spacing.sm, paddingBottom: t.spacing.lg },
+  title: { paddingBottom: t.spacing.lg },
   cell: {
     backgroundColor: t.colors.surface,
     borderColor: t.colors.border,

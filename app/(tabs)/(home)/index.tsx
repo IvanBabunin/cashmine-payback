@@ -5,7 +5,13 @@ import { RefreshControl, View } from 'react-native';
 import { BalanceCard } from '@/components/screens/home/BalanceCard';
 import { TotalHeader } from '@/components/screens/home/TotalHeader';
 import { UnresolvedClaimBanner } from '@/components/screens/home/UnresolvedClaimBanner';
-import { EmptyState, ErrorState, LoadingState, Screen } from '@/components/shared/layout';
+import {
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  Screen,
+  ScreenTitle,
+} from '@/components/shared/layout';
 import { Text } from '@/components/shared/ui';
 import { useDisplayBalances } from '@/hooks/api/balances/useDisplayBalances';
 import { useCreateClaim } from '@/hooks/api/claims/useCreateClaim';
@@ -23,14 +29,16 @@ export default function HomeScreen() {
 
   if (query.isPending) {
     return (
-      <Screen>
+      <Screen edges={['top']}>
+        <ScreenTitle title={t('title')} />
         <LoadingState />
       </Screen>
     );
   }
   if (!query.data || !balances || total === null) {
     return (
-      <Screen>
+      <Screen edges={['top']}>
+        <ScreenTitle title={t('title')} />
         <ErrorState message={t(errorMessageKey(query.error))} onRetry={() => query.refetch()} />
       </Screen>
     );
@@ -44,9 +52,7 @@ export default function HomeScreen() {
         <RefreshControl refreshing={query.isRefetching} onRefresh={() => query.refetch()} />
       }
     >
-      <Text variant="subtitle" style={styles.brand}>
-        {t('brand')}
-      </Text>
+      <ScreenTitle title={t('title')} />
       <TotalHeader
         totalCents={total}
         balances={balances}
@@ -94,7 +100,6 @@ export default function HomeScreen() {
 }
 
 const useStyles = makeStyles((t) => ({
-  brand: { paddingTop: t.spacing.sm },
   section: {
     flexDirection: 'row',
     justifyContent: 'space-between',

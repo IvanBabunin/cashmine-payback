@@ -18,7 +18,6 @@
     "seconds": "{{count}}s ago",
     "minutes": "{{count}} min ago"
   },
-  "brand": "CashMine",
   "assets": "Assets",
   "assetCount": "{{count}} assets",
   "claimAsset": "Claim {{asset}}",

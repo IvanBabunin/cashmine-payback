@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
-import { Screen } from '@/components/shared/layout';
+import { Screen, ScreenTitle } from '@/components/shared/layout';
 import { Button, Text } from '@/components/shared/ui';
 import { useAuthStore } from '@/store/auth';
 import { useSettingsStore, type ThemeMode } from '@/store/settings';
@@ -19,9 +19,7 @@ export default function SettingsScreen() {
 
   return (
     <Screen scroll edges={['top']}>
-      <Text variant="title" style={styles.title}>
-        {t('title')}
-      </Text>
+      <ScreenTitle title={t('title')} />
 
       <View style={styles.section}>
         <Text variant="label" color="textMuted">
@@ -76,7 +74,6 @@ export default function SettingsScreen() {
 }
 
 const useStyles = makeStyles((t) => ({
-  title: { paddingTop: t.spacing.sm },
   section: { gap: t.spacing.sm },
   card: {
     gap: t.spacing.md,
